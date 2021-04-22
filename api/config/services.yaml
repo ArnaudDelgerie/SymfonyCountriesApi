@@ -8,6 +8,7 @@ framework:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     json_dir: "%kernel.project_dir%/src/Json"
+    flag_dir: "%kernel.project_dir%/public/Flag"
 
 services:
     # default configuration for services in *this* file

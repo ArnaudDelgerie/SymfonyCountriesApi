@@ -33,14 +33,14 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // $this->loadLanguages();
-        // $this->loadCountries();
-        // $this->loadCountriesTranslations("/CountriesEn.json", "en");
-        // $this->loadCountriesTranslations("/CountriesFr.json", "fr");
-        // $this->loadCountriesTranslations("/CountriesEs.json", "es");
-        // $this->loadCountriesTranslations("/CountriesDe.json", "de");
-        // $this->loadCountriesTranslations("/CountriesIt.json", "it");
-        // $this->loadCountriesTranslations("/CountriesPt.json", "Pt");
+        $this->loadLanguages();
+        $this->loadCountries();
+        $this->loadCountriesTranslations("/CountriesEn.json", "en");
+        $this->loadCountriesTranslations("/CountriesFr.json", "fr");
+        $this->loadCountriesTranslations("/CountriesEs.json", "es");
+        $this->loadCountriesTranslations("/CountriesDe.json", "de");
+        $this->loadCountriesTranslations("/CountriesIt.json", "it");
+        $this->loadCountriesTranslations("/CountriesPt.json", "Pt");
         $this->loadCountriesTranslations("/CountriesRu.json", "Ru");
     }
 
