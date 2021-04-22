@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LanguageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Language
      * @ORM\Column(type="string", length=2)
      */
     private $code;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CountryTranslation::class, mappedBy="language", orphanRemoval=true)
+     */
+    private $countryTranslations;
+
+    public function __construct()
+    {
+        $this->countryTranslations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,36 @@ class Language
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CountryTranslation[]
+     */
+    public function getCountryTranslations(): Collection
+    {
+        return $this->countryTranslations;
+    }
+
+    public function addCountryTranslation(CountryTranslation $countryTranslation): self
+    {
+        if (!$this->countryTranslations->contains($countryTranslation)) {
+            $this->countryTranslations[] = $countryTranslation;
+            $countryTranslation->setLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCountryTranslation(CountryTranslation $countryTranslation): self
+    {
+        if ($this->countryTranslations->removeElement($countryTranslation)) {
+            // set the owning side to null (unless already changed)
+            if ($countryTranslation->getLanguage() === $this) {
+                $countryTranslation->setLanguage(null);
+            }
+        }
 
         return $this;
     }
