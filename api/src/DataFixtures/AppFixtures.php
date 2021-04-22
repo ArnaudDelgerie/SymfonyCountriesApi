@@ -67,6 +67,7 @@ class AppFixtures extends Fixture
             $country->setAlpha2($data['alpha2']);
             $country->setAlpha3($data['alpha3']);
             $country->setUnCode($data['id']);
+            $country->setFlag($data['alpha2'] . ".png");
             $this->manager->persist($country);
         }
 

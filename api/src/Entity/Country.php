@@ -39,6 +39,11 @@ class Country
      */
     private $countryTranslations;
 
+    /**
+     * @ORM\Column(type="string", length=6)
+     */
+    private $flag;
+
     public function __construct()
     {
         $this->countryTranslations = new ArrayCollection();
@@ -111,6 +116,18 @@ class Country
                 $countryTranslation->setCountry(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFlag(): ?string
+    {
+        return $this->flag;
+    }
+
+    public function setFlag(string $flag): self
+    {
+        $this->flag = $flag;
 
         return $this;
     }
