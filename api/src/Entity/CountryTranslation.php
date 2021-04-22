@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Serializer\Annotation\SerializedName;
 use App\Repository\CountryTranslationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +26,7 @@ class CountryTranslation
     /**
      * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="countryTranslations")
      * @ORM\JoinColumn(nullable=false)
+     * @SerializedName("data")
      */
     private $country;
 
