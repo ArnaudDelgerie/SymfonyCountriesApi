@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Country;
 use App\Entity\Language;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -21,7 +22,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $this->loadLanguages();
+        // $this->loadLanguages();
+        $this->loadCountries();
     }
 
     private function loadLanguages()
@@ -33,6 +35,21 @@ class AppFixtures extends Fixture
             $language->setName($data['name']);
             $language->setCode($data['code']);
             $this->manager->persist($language);
+        }
+
+        $this->manager->flush();
+    }
+
+    private function loadCountries()
+    {
+        $countries = json_decode(file_get_contents($this->container->getParameter("json_dir") . "/CountriesEn.json"), true);
+
+        foreach ($countries as $data) {
+            $country = new Country();
+            $country->setAlpha2($data['alpha2']);
+            $country->setAlpha3($data['alpha3']);
+            $country->setUnCode($data['id']);
+            $this->manager->persist($country);
         }
 
         $this->manager->flush();
