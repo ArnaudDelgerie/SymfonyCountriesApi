@@ -19,6 +19,21 @@ class CountryTranslationRepository extends ServiceEntityRepository
         parent::__construct($registry, CountryTranslation::class);
     }
 
+    /**
+     * @return CountryTranslation[] Returns an array of Product objects
+     */
+    public function findByName($name, $language)
+    {
+        return $this->createQueryBuilder('c')
+            ->Where('c.name LIKE :name')
+            ->andWhere('c.language = :language')
+            ->setParameter('name', $name . '%')
+            ->setParameter('language', $language)
+            ->getQuery()
+            ->getResult();;
+    }
+
+
     // /**
     //  * @return CountryTranslation[] Returns an array of CountryTranslation objects
     //  */

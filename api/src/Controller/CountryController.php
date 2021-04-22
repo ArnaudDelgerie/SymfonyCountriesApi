@@ -59,7 +59,7 @@ class CountryController extends AbstractController
             ], 400);
         }
 
-        $countryTranslation = $this->countryTranslationRepository->findBy(['language' => $language->getId(), "country" => $country->getId()]);
+        $countryTranslation = $this->countryTranslationRepository->findOneBy(['language' => $language->getId(), "country" => $country->getId()]);
         $countryTranslation = $this->get('serializer')->normalize($countryTranslation, 'json', $this->schema->fetchCountries());
 
         return new JsonResponse([
@@ -82,7 +82,7 @@ class CountryController extends AbstractController
             ], 400);
         }
 
-        $countryTranslation = $this->countryTranslationRepository->findBy(['language' => $language->getId(), "country" => $country->getId()]);
+        $countryTranslation = $this->countryTranslationRepository->findOneBy(['language' => $language->getId(), "country" => $country->getId()]);
         $countryTranslation = $this->get('serializer')->normalize($countryTranslation, 'json', $this->schema->fetchCountries());
 
         return new JsonResponse([
@@ -105,12 +105,34 @@ class CountryController extends AbstractController
             ], 400);
         }
 
-        $countryTranslation = $this->countryTranslationRepository->findBy(['language' => $language->getId(), "country" => $country->getId()]);
+        $countryTranslation = $this->countryTranslationRepository->findOneBy(['language' => $language->getId(), "country" => $country->getId()]);
         $countryTranslation = $this->get('serializer')->normalize($countryTranslation, 'json', $this->schema->fetchCountries());
 
         return new JsonResponse([
             "success" => true,
             "data" => $countryTranslation
+        ], 200);
+    }
+
+    /**
+     * @Route("/countries/name/{name}", methods={"GET"})
+     */
+    public function fetchCountriesByName($name, Request $request)
+    {
+        $language = $this->checkLang($request);
+        if (strlen($name) < 2) {
+            return new JsonResponse([
+                "success" => false,
+                "message" => "The length of the name must be greater than 2" 
+            ], 400);
+        }
+
+        $countriesTranslation = $this->countryTranslationRepository->findByName($name, $language);
+        $countriesTranslation = $this->get('serializer')->normalize($countriesTranslation, 'json', $this->schema->fetchCountries());
+
+        return new JsonResponse([
+            "success" => true,
+            "data" => $countriesTranslation
         ], 200);
     }
 
