@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Repository\CountryRepository;
 use App\Repository\LanguageRepository;
+use App\Serializer\Schema\CountrySchema;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CountryTranslationRepository;
-use App\Serializer\Schema\CountrySchema;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -55,7 +56,7 @@ class CountryController extends AbstractController
         if (!$country) {
             return new JsonResponse([
                 "success" => false,
-                "message" => "Country not found" 
+                "message" => "Country not found"
             ], 400);
         }
 
@@ -78,7 +79,7 @@ class CountryController extends AbstractController
         if (!$country) {
             return new JsonResponse([
                 "success" => false,
-                "message" => "Country not found" 
+                "message" => "Country not found"
             ], 400);
         }
 
@@ -101,7 +102,7 @@ class CountryController extends AbstractController
         if (!$country) {
             return new JsonResponse([
                 "success" => false,
-                "message" => "Country not found" 
+                "message" => "Country not found"
             ], 400);
         }
 
@@ -123,7 +124,7 @@ class CountryController extends AbstractController
         if (strlen($name) < 2) {
             return new JsonResponse([
                 "success" => false,
-                "message" => "The length of the name must be greater than 2" 
+                "message" => "The length of the name must be greater than 2"
             ], 400);
         }
 
@@ -134,6 +135,22 @@ class CountryController extends AbstractController
             "success" => true,
             "data" => $countriesTranslation
         ], 200);
+    }
+
+    /**
+     * @Route("/country/flag/{fileName}", methods={"GET"})
+     */
+    public function getCountryFlag($fileName)
+    {
+        try {
+            $file = new File($this->getParameter("flag_dir") . "/" . $fileName);
+            return $this->file($file);
+        } catch (\Throwable $th) {
+            return new JsonResponse([
+                "success" => false,
+                "message" => "Flag not found"
+            ], 400);
+        }
     }
 
     private function checkLang($request)
