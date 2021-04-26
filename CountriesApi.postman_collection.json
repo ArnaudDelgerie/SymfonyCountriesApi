@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "b0f04040-0e6d-4877-bfce-78955e7ce409",
+		"name": "CountriesApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Language",
+			"item": [
+				{
+					"name": "fetch languages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/languages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"languages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Country",
+			"item": [
+				{
+					"name": "fetch countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/countries?lang=es",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"countries"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "es"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch country by alpha2 code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/country/alpha2/gb?lang=fr",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"country",
+								"alpha2",
+								"gb"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "fr"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch country by alpha3 code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/country/alpha3/gbr?lang=fr",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"country",
+								"alpha3",
+								"gbr"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "fr"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch country by uncode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/country/uncode/826?lang=it",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"country",
+								"uncode",
+								"826"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "it"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch countries by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/countries/name/Po?lang=fr",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"countries",
+								"name",
+								"Po"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "fr"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch country flag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/country/flag/fr.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"country",
+								"flag",
+								"fr.png"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
